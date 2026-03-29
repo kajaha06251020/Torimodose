@@ -91,6 +91,22 @@ const QUESTIONS: Question[] = [
   { key: "emergency_small_loan", text: "一時的に生活費が足りない緊急事態ですか？（無利子10万円）" },
   { key: "comprehensive_support_loan", text: "失業等で生活全般に困窮していますか？（月15-20万円貸付）" },
   { key: "single_parent_loan", text: "ひとり親家庭で、生活費・教育費等の資金が必要ですか？" },
+  // --- 追加：控除（節税） ---
+  { key: "npo_donation", text: "認定NPO法人や公益社団法人に寄附をしていますか？（税額控除40%）" },
+  { key: "small_asset_deduction", text: "個人事業主で、30万円未満の事業用資産（PC等）を購入しましたか？" },
+  { key: "medical_expenses_extended", text: "レーシック・歯科矯正・補聴器・通院交通費等を支払いましたか？" },
+  { key: "home_office_deduction", text: "フリーランスで自宅を仕事場として使っていますか？（家賃等を経費化）" },
+  // --- 追加：社会保険料の減免 ---
+  { key: "nhk_unemployment_reduction", text: "会社都合で退職し、国保に加入しましたか？（保険料7割減の可能性）" },
+  { key: "pension_exemption", text: "失業・収入減少で国民年金の納付が厳しいですか？（免除制度あり）" },
+  { key: "pension_maternity_exemption", text: "自営業・フリーランスで出産予定がありますか？（年金4か月免除）" },
+  { key: "student_pension_deferral", text: "20歳以上の学生で国民年金保険料の納付を猶予したいですか？" },
+  { key: "resident_tax_reduction", text: "失業・災害等で住民税の納付が困難ですか？（減免制度あり）" },
+  // --- 追加：物価高騰対策 ---
+  { key: "price_hike_benefit", text: "住民税非課税世帯ですか？（物価高騰支援3万円+子1人2万円）" },
+  { key: "energy_subsidy", text: "電気・ガス料金の補助が自動適用されているか確認しましたか？" },
+  { key: "child_support_allowance_2025", text: "0〜18歳の子どもがいますか？（子育て応援手当2万円/人）" },
+  { key: "free_highschool_2025", text: "2025年度に高校生のお子さんがいますか？（所得制限撤廃で全世帯無償）" },
 ]
 
 type AnswerEntry = { using: boolean; amount?: number }

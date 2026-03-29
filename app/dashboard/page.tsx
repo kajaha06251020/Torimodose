@@ -25,9 +25,7 @@ export default async function DashboardPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-bold">マイページ</h1>
-        <Button asChild>
-          <Link href="/">新しい診断を受ける</Link>
-        </Button>
+        <Button render={<Link href="/" />}>新しい診断を受ける</Button>
       </div>
 
       {/* Empty state */}
@@ -35,9 +33,7 @@ export default async function DashboardPage() {
         <Card>
           <CardContent className="flex flex-col items-center gap-4 py-12">
             <p className="text-muted-foreground">まだ診断結果がありません。</p>
-            <Button asChild>
-              <Link href="/">最初の診断を受ける</Link>
-            </Button>
+            <Button render={<Link href="/" />}>最初の診断を受ける</Button>
           </CardContent>
         </Card>
       ) : (

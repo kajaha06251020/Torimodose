@@ -79,7 +79,7 @@ export function QuickInputForm() {
 
       <div className="space-y-2">
         <Label htmlFor="occupation">職種</Label>
-        <Select value={occupation} onValueChange={setOccupation}>
+        <Select value={occupation} onValueChange={(v) => setOccupation(v ?? "")}>
           <SelectTrigger id="occupation">
             <SelectValue placeholder="職種を選択" />
           </SelectTrigger>
@@ -95,7 +95,7 @@ export function QuickInputForm() {
 
       <div className="space-y-2">
         <Label htmlFor="region">勤務地</Label>
-        <Select value={region} onValueChange={setRegion}>
+        <Select value={region} onValueChange={(v) => setRegion(v ?? "")}>
           <SelectTrigger id="region">
             <SelectValue placeholder="勤務地を選択" />
           </SelectTrigger>

@@ -27,7 +27,7 @@ export default async function FullResultPage({ searchParams }: Props) {
     name: r.name,
     category: r.category as "income" | "credit",
     questionKey: r.questionKey,
-    condition: r.condition,
+    condition: r.condition as DeductionRule["condition"],
     formula: r.formula as DeductionRule["formula"],
     legalBasis: r.legalBasis,
     maxAmount: r.maxAmount,
@@ -70,9 +70,7 @@ export default async function FullResultPage({ searchParams }: Props) {
       )}
 
       <div className="mt-10 flex flex-col items-center gap-4">
-        <Button asChild size="lg">
-          <Link href="/auth/signup">結果を保存する（無料アカウント作成）</Link>
-        </Button>
+        <Button render={<Link href="/auth/signup" />} size="lg">結果を保存する（無料アカウント作成）</Button>
         <Link href="/" className="text-sm text-muted-foreground underline">
           もう一度診断する
         </Link>

@@ -74,10 +74,8 @@ export default async function QuickResultPage({ searchParams }: Props) {
       )}
 
       <div className="flex w-full max-w-md flex-col items-center gap-3">
-        <Button asChild className="w-full">
-          <Link href={`/diagnosis?income=${params.income}&age=${params.age}`}>
+        <Button render={<Link href={`/diagnosis?income=${params.income}&age=${params.age}`} />} className="w-full">
             正確な取り戻し額を診断する
-          </Link>
         </Button>
         <Link href="/" className="text-sm text-muted-foreground underline">
           もう一度試す

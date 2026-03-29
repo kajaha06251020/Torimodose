@@ -26,13 +26,7 @@ export function QuickInputForm() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!isComplete) return;
-    const params = new URLSearchParams({
-      income,
-      occupation,
-      region,
-      age,
-    });
-    router.push(`/result/quick?${params.toString()}`);
+    router.push(`/diagnosis?income=${income}&age=${age}`);
   }
 
   return (
@@ -100,7 +94,7 @@ export function QuickInputForm() {
       </div>
 
       <Button type="submit" className="w-full" disabled={!isComplete}>
-        損失額を診断する
+        取り戻せる額を診断する
       </Button>
     </form>
   );

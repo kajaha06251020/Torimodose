@@ -6,7 +6,6 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { deductionRules } from "@/lib/db/schema";
 import { saveDiagnosis } from "@/lib/actions/save-diagnosis";
-import { saveDiagnosisInputs } from "@/lib/actions/save-diagnosis-inputs";
 import type { DeductionRule } from "@/lib/engine/deduction-engine";
 
 type Props = {
@@ -41,8 +40,8 @@ export default async function FullResultPage({ searchParams }: Props) {
   const result = runFullDiagnosis(parsedData, rules);
   const { deductions, totalPotentialSaving } = result;
 
-  // 常に自動保存（匿名でも保存）
-  const diagnosisResult = await saveDiagnosis({
+  // 常に自動保存（匿名でも保存） + 入力データも同時に保存
+  await saveDiagnosis({
     type: "full",
     input: parsedData,
     result: {
@@ -52,33 +51,15 @@ export default async function FullResultPage({ searchParams }: Props) {
     },
     totalPotentialSaving,
     answers: parsedData.answers,
+    diagnosisInputData: parsedData.age && parsedData.occupation && parsedData.region
+      ? {
+          income: parsedData.annualIncome,
+          age: parsedData.age,
+          occupation: parsedData.occupation,
+          region: parsedData.region,
+        }
+      : undefined,
   });
-
-  // 診断入力データを保存（年収、年齢、職種、勤務地）
-  if (diagnosisResult.diagnosisId && parsedData.age && parsedData.occupation && parsedData.region) {
-    try {
-      console.log("About to save diagnosis inputs with diagnosisId:", diagnosisResult.diagnosisId);
-      console.log("parsedData:", parsedData);
-
-      await saveDiagnosisInputs({
-        diagnosisId: diagnosisResult.diagnosisId,
-        income: parsedData.annualIncome,
-        age: parsedData.age,
-        occupation: parsedData.occupation,
-        region: parsedData.region,
-      });
-      console.log("Successfully saved diagnosis inputs");
-    } catch (error) {
-      console.error("Failed to save diagnosis inputs:", error);
-    }
-  } else {
-    console.log("Skipping diagnosis inputs save because:", {
-      hasDiagnosisId: !!diagnosisResult.diagnosisId,
-      hasAge: !!parsedData.age,
-      hasOccupation: !!parsedData.occupation,
-      hasRegion: !!parsedData.region,
-    });
-  }
 
   const taxDeductions = deductions.filter((d) => d.category !== "benefit");
   const benefits = deductions.filter((d) => d.category === "benefit");

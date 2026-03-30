@@ -9,6 +9,12 @@ export async function saveDiagnosis(params: {
   result: Record<string, unknown>;
   totalPotentialSaving?: number;
   answers?: Record<string, unknown>;
+  diagnosisInputData?: {
+    income: number;
+    age: number;
+    occupation: string;
+    region: string;
+  };
 }) {
   const session = await auth();
   // ユーザーIDは optional（匿名でも保存可能）
@@ -48,6 +54,7 @@ export async function saveDiagnosis(params: {
           result: params.result,
           totalPotentialSaving: params.totalPotentialSaving || 0,
           answers: params.answers,
+          diagnosisInputData: params.diagnosisInputData || null,
         }),
       }
     );

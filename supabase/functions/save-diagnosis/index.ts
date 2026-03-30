@@ -22,7 +22,7 @@ Deno.serve(async (req) => {
 
   try {
     const payload = await req.json()
-    const { userId, type, input, result, totalPotentialSaving, answers } = payload
+    const { userId, type, input, result, totalPotentialSaving, answers, diagnosisInputData } = payload
 
     // バリデーション
     if (!type || !input || !result) {
@@ -73,6 +73,23 @@ Deno.serve(async (req) => {
           headers: { "Content-Type": "application/json" },
         }
       )
+    }
+
+    // diagnosis_inputs に入力データを保存
+    if (data?.[0]?.id && diagnosisInputData) {
+      const { income, age, occupation, region } = diagnosisInputData
+      const { error: inputError } = await supabase
+        .from("diagnosis_inputs")
+        .insert({
+          diagnosis_id: data[0].id,
+          income,
+          age,
+          occupation,
+          region,
+        })
+      if (inputError) {
+        console.error("Error saving diagnosis inputs:", inputError)
+      }
     }
 
     return new Response(

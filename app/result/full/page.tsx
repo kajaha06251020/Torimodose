@@ -114,9 +114,6 @@ export default async function FullResultPage({ searchParams }: Props) {
       )}
 
       <div className="mt-10 space-y-4">
-        <div className="rounded-lg bg-green-50 p-4 text-center text-green-800">
-          診断結果を保存しました
-        </div>
         <p className="text-center text-sm text-muted-foreground">
           ログイン不要 | 匿名で診断できます
         </p>

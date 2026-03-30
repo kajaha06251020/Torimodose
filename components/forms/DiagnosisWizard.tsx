@@ -2,6 +2,11 @@
 
 import { useState, useMemo } from "react"
 import { useRouter } from "next/navigation"
+import {
+  Coins, HeartPulse, Briefcase, Baby, Accessibility, House, Shield,
+  Laptop, FileText, ScrollText, UserRound, Globe, Stethoscope,
+  HardHat, Wheat, GraduationCap, Sun, type LucideIcon,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -17,7 +22,7 @@ type Question = {
 type Category = {
   id: string
   label: string
-  emoji: string
+  icon: LucideIcon
   description: string
   questionCount: number
 }
@@ -270,23 +275,23 @@ const QUESTIONS: Question[] = [
 ]
 
 const CATEGORIES: Category[] = [
-  { id: "tax",         emoji: "💰", label: "節税・控除",          description: "所得控除・税額控除で税金を取り戻す", questionCount: 0 },
-  { id: "medical",     emoji: "🏥", label: "医療・健康",          description: "高額医療費・傷病手当金など", questionCount: 0 },
-  { id: "employment",  emoji: "💼", label: "雇用・就職",          description: "失業給付・再就職手当・職業訓練など", questionCount: 0 },
-  { id: "childcare",   emoji: "👶", label: "子育て・教育",        description: "児童手当・出産一時金・学費支援など", questionCount: 0 },
-  { id: "disability",  emoji: "♿", label: "障害・介護",          description: "障害年金・介護休業給付・福祉用具など", questionCount: 0 },
-  { id: "living",      emoji: "🏠", label: "住宅・生活・年金",    description: "住居支援・遺族年金・災害支援など", questionCount: 0 },
-  { id: "insurance",   emoji: "🛡️", label: "社会保険料の減免",    description: "国保軽減・年金免除・130万円の壁など", questionCount: 0 },
-  { id: "freelance",   emoji: "💻", label: "フリーランス・事業者", description: "経営セーフティ共済・インボイス・補助金など", questionCount: 0 },
-  { id: "reform",      emoji: "📋", label: "2025-2026 税制改正",  description: "基礎控除引き上げ・年収の壁178万円・暗号資産など", questionCount: 0 },
-  { id: "inheritance", emoji: "📜", label: "相続・贈与",          description: "暦年贈与・住宅資金贈与・相続時精算課税など", questionCount: 0 },
-  { id: "senior",      emoji: "👴", label: "シニア向け",          description: "在職老齢年金・高年齢雇用継続・加給年金など", questionCount: 0 },
-  { id: "foreigner",   emoji: "🌏", label: "外国人居住者向け",    description: "租税条約・厚生年金の脱退一時金など", questionCount: 0 },
-  { id: "prevention",  emoji: "🩺", label: "予防・健康増進",      description: "健康診断・予防接種・メタボ健診など", questionCount: 0 },
-  { id: "housing",     emoji: "🏗️", label: "住宅・リフォーム",   description: "省エネ住宅補助・窓リノベ・給湯器など", questionCount: 0 },
-  { id: "agriculture", emoji: "🌾", label: "農業・就農",          description: "就農準備資金・経営開始資金など", questionCount: 0 },
-  { id: "student",     emoji: "🎓", label: "学生向け",            description: "給付型奨学金・授業料減免・教育訓練給付金など", questionCount: 0 },
-  { id: "energy",      emoji: "☀️", label: "省エネ・環境",        description: "太陽光発電税制・蓄電池補助・断熱リフォームなど", questionCount: 0 },
+  { id: "tax",         icon: Coins,          label: "節税・控除",          description: "所得控除・税額控除で税金を取り戻す", questionCount: 0 },
+  { id: "medical",     icon: HeartPulse,     label: "医療・健康",          description: "高額医療費・傷病手当金など", questionCount: 0 },
+  { id: "employment",  icon: Briefcase,      label: "雇用・就職",          description: "失業給付・再就職手当・職業訓練など", questionCount: 0 },
+  { id: "childcare",   icon: Baby,           label: "子育て・教育",        description: "児童手当・出産一時金・学費支援など", questionCount: 0 },
+  { id: "disability",  icon: Accessibility,  label: "障害・介護",          description: "障害年金・介護休業給付・福祉用具など", questionCount: 0 },
+  { id: "living",      icon: House,          label: "住宅・生活・年金",    description: "住居支援・遺族年金・災害支援など", questionCount: 0 },
+  { id: "insurance",   icon: Shield,         label: "社会保険料の減免",    description: "国保軽減・年金免除・130万円の壁など", questionCount: 0 },
+  { id: "freelance",   icon: Laptop,         label: "フリーランス・事業者", description: "経営セーフティ共済・インボイス・補助金など", questionCount: 0 },
+  { id: "reform",      icon: FileText,       label: "2025-2026 税制改正",  description: "基礎控除引き上げ・年収の壁178万円・暗号資産など", questionCount: 0 },
+  { id: "inheritance", icon: ScrollText,     label: "相続・贈与",          description: "暦年贈与・住宅資金贈与・相続時精算課税など", questionCount: 0 },
+  { id: "senior",      icon: UserRound,      label: "シニア向け",          description: "在職老齢年金・高年齢雇用継続・加給年金など", questionCount: 0 },
+  { id: "foreigner",   icon: Globe,          label: "外国人居住者向け",    description: "租税条約・厚生年金の脱退一時金など", questionCount: 0 },
+  { id: "prevention",  icon: Stethoscope,    label: "予防・健康増進",      description: "健康診断・予防接種・メタボ健診など", questionCount: 0 },
+  { id: "housing",     icon: HardHat,        label: "住宅・リフォーム",    description: "省エネ住宅補助・窓リノベ・給湯器など", questionCount: 0 },
+  { id: "agriculture", icon: Wheat,          label: "農業・就農",          description: "就農準備資金・経営開始資金など", questionCount: 0 },
+  { id: "student",     icon: GraduationCap,  label: "学生向け",            description: "給付型奨学金・授業料減免・教育訓練給付金など", questionCount: 0 },
+  { id: "energy",      icon: Sun,            label: "省エネ・環境",        description: "太陽光発電税制・蓄電池補助・断熱リフォームなど", questionCount: 0 },
 ]
 
 // Compute question counts
@@ -294,12 +299,12 @@ CATEGORIES.forEach((cat) => {
   cat.questionCount = QUESTIONS.filter((q) => q.category === cat.id).length
 })
 
-const PRESETS: { label: string; emoji: string; ids: string[] }[] = [
-  { label: "会社員",          emoji: "👔", ids: ["tax", "medical", "employment", "childcare", "insurance", "reform", "living"] },
-  { label: "フリーランス",    emoji: "💻", ids: ["tax", "freelance", "insurance", "medical", "reform", "employment"] },
-  { label: "子育て中",        emoji: "👶", ids: ["childcare", "tax", "medical", "employment", "living"] },
-  { label: "シニア",          emoji: "👴", ids: ["senior", "tax", "medical", "insurance", "living", "inheritance"] },
-  { label: "住宅購入・改修",  emoji: "🏠", ids: ["housing", "tax", "energy", "living"] },
+const PRESETS: { label: string; ids: string[] }[] = [
+  { label: "会社員",         ids: ["tax", "medical", "employment", "childcare", "insurance", "reform", "living"] },
+  { label: "フリーランス",   ids: ["tax", "freelance", "insurance", "medical", "reform", "employment"] },
+  { label: "子育て中",       ids: ["childcare", "tax", "medical", "employment", "living"] },
+  { label: "シニア",         ids: ["senior", "tax", "medical", "insurance", "living", "inheritance"] },
+  { label: "住宅購入・改修", ids: ["housing", "tax", "energy", "living"] },
 ]
 
 type AnswerEntry = { using: boolean; amount?: number }
@@ -409,9 +414,8 @@ export function DiagnosisWizard({ annualIncome, age }: Props) {
                   <button
                     key={preset.label}
                     onClick={() => applyPreset(preset.ids)}
-                    className="flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                    className="rounded-full border px-3 py-1 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
                   >
-                    <span>{preset.emoji}</span>
                     {preset.label}
                   </button>
                 ))}
@@ -434,7 +438,7 @@ export function DiagnosisWizard({ annualIncome, age }: Props) {
                         : "border-border hover:border-primary/40 hover:bg-muted/30"
                     }`}
                   >
-                    <span className="text-xl leading-none mt-0.5 shrink-0">{cat.emoji}</span>
+                    <cat.icon className="mt-0.5 size-5 shrink-0 text-foreground/70" strokeWidth={1.5} />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-1">
                         <span className="font-medium text-sm leading-snug">{cat.label}</span>

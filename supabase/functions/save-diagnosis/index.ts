@@ -25,7 +25,7 @@ Deno.serve(async (req) => {
     const { userId, type, input, result, totalPotentialSaving, answers } = payload
 
     // バリデーション
-    if (!userId || !type || !input || !result) {
+    if (!type || !input || !result) {
       return new Response(
         JSON.stringify({ error: "Missing required fields" }),
         {

@@ -12,23 +12,23 @@ export default function PrivacyPage() {
             <h1 className="text-3xl sm:text-4xl font-bold">プライバシーポリシー</h1>
           </div>
           <p className="text-muted-foreground">
-            Torimodoseは個人情報の保護を最優先とします。本ポリシーは、どのデータが収集・保存されるかを透明に説明しています。
+            Torimodoseは個人情報の保護を最優先とします。本ポリシーは、どのデータが収集・保存されるかを透明に説明しています。診断結果はすべて匿名で保存され、個人を特定できるような情報は含まれません。
           </p>
         </div>
 
         {/* データ保護の基本方針 */}
         <Card>
           <CardHeader>
-            <CardTitle>🎯 基本方針：ログイン不要で診断できます</CardTitle>
+            <CardTitle>基本方針：ログイン不要で匿名診断</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p>
-              Torimodoseでは、ログインなしで診断を完全に利用できます。このため、個人情報の入力を強要することはありません。
+              Torimodoseでは、ログインなしで診断を完全に利用できます。メールアドレスや個人情報を提供する必要はありません。
             </p>
             <div className="bg-green-50 dark:bg-green-950 p-4 rounded-lg border border-green-200 dark:border-green-800">
-              <p className="font-semibold text-green-900 dark:text-green-100">✓ 匿名で診断できます</p>
+              <p className="font-semibold text-green-900 dark:text-green-100">匿名で診断して、結果を保存</p>
               <p className="text-sm text-green-800 dark:text-green-200 mt-1">
-                メールアドレスや個人情報を提供せずに、診断結果を表示します。
+                診断結果はすべて匿名で保存されます。個人を特定できる情報は記録されません。メールアドレスや名前などの個人情報の入力は不要です。
               </p>
             </div>
           </CardContent>
@@ -37,74 +37,67 @@ export default function PrivacyPage() {
         {/* 保存されるデータ・されないデータ */}
         <Card>
           <CardHeader>
-            <CardTitle>📊 保存されるデータ / されないデータ</CardTitle>
+            <CardTitle>保存されるデータ / されないデータ</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* 保存されない */}
             <div>
-              <h3 className="font-semibold text-lg mb-3">保存されないデータ ✓</h3>
-              <ul className="space-y-2 ml-4">
-                <li className="flex gap-2">
-                  <span className="text-green-600 font-bold">✓</span>
-                  <span>
-                    <strong>診断入力データ</strong>（年収、年齢、職種、勤務地）
-                    <br />
-                    <span className="text-sm text-muted-foreground">
-                      これらはURLパラメータとしてのみ処理され、サーバーに保存されません。
-                    </span>
+              <h3 className="font-semibold text-lg mb-3">保存されないデータ</h3>
+              <ul className="space-y-3 ml-4">
+                <li>
+                  <strong>IPアドレス・利用端末情報</strong>
+                  <br />
+                  <span className="text-sm text-muted-foreground">
+                    個別にトラッキングされません。
                   </span>
                 </li>
-                <li className="flex gap-2">
-                  <span className="text-green-600 font-bold">✓</span>
-                  <span>
-                    <strong>診断中の回答</strong>
-                    <br />
-                    <span className="text-sm text-muted-foreground">
-                      各カテゴリの選択状況はブラウザメモリのみで処理されます。
-                    </span>
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-green-600 font-bold">✓</span>
-                  <span>
-                    <strong>IPアドレス・利用端末情報</strong>（匿名利用時）
-                    <br />
-                    <span className="text-sm text-muted-foreground">
-                      個別にトラッキングされません。
-                    </span>
+                <li>
+                  <strong>メールアドレス</strong>
+                  <br />
+                  <span className="text-sm text-muted-foreground">
+                    診断に必要ないため、一切記録されません。
                   </span>
                 </li>
               </ul>
             </div>
 
-            {/* 保存される（任意） */}
+            {/* 保存される */}
             <div className="border-t pt-6">
-              <h3 className="font-semibold text-lg mb-3">保存されるデータ（任意）</h3>
+              <h3 className="font-semibold text-lg mb-3">保存される診断データ（匿名）</h3>
               <p className="text-sm text-muted-foreground mb-3">
-                「結果を保存する」ボタンをクリックして、アカウントを作成した場合のみ以下を保存します：
+                すべてのユーザーの診断結果は、匿名で保存されます。個人を特定できる情報は含まれません：
               </p>
-              <ul className="space-y-2 ml-4">
-                <li className="flex gap-2">
-                  <span className="font-bold">→</span>
-                  <span>
-                    <strong>メールアドレス</strong>
-                    <br />
-                    <span className="text-sm text-muted-foreground">
-                      ログイン用に使用されます。
-                    </span>
+              <ul className="space-y-3 ml-4">
+                <li>
+                  <strong>診断入力データ</strong>（年収、年齢、職種、地域）
+                  <br />
+                  <span className="text-sm text-muted-foreground">
+                    診断結果を再度確認するために保存されます。入力データは暗号化されて保存されます。
                   </span>
                 </li>
-                <li className="flex gap-2">
-                  <span className="font-bold">→</span>
-                  <span>
-                    <strong>診断結果</strong>（年収、職種、地域、診断の回答、該当する控除・給付）
-                    <br />
-                    <span className="text-sm text-muted-foreground">
-                      過去の診断をマイページで確認するために保存されます。
-                    </span>
+                <li>
+                  <strong>診断回答</strong>（各カテゴリの選択）
+                  <br />
+                  <span className="text-sm text-muted-foreground">
+                    どの控除・給付金が該当するかを記録します。
+                  </span>
+                </li>
+                <li>
+                  <strong>診断結果</strong>（該当する控除・給付、取り戻せる金額）
+                  <br />
+                  <span className="text-sm text-muted-foreground">
+                    計算結果が保存されます。
                   </span>
                 </li>
               </ul>
+              <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg border border-blue-200 dark:border-blue-800 mt-4">
+                <p className="font-semibold text-blue-900 dark:text-blue-100">
+                  完全な匿名性を保証
+                </p>
+                <p className="text-sm text-blue-800 dark:text-blue-200 mt-2">
+                  診断データは ID（UUID）でのみ識別され、個人を特定できるメールアドレス、名前、電話番号などは一切保存されません。
+                </p>
+              </div>
             </div>
 
             {/* 給与統計データ */}
@@ -124,7 +117,7 @@ export default function PrivacyPage() {
         {/* Cookie・セッション */}
         <Card>
           <CardHeader>
-            <CardTitle>🍪 Cookie・セッション</CardTitle>
+            <CardTitle>Cookie・セッション</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p>
@@ -145,7 +138,7 @@ export default function PrivacyPage() {
         {/* データ削除方法 */}
         <Card>
           <CardHeader>
-            <CardTitle>🗑️ データ削除方法</CardTitle>
+            <CardTitle>データ削除方法</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
@@ -168,7 +161,7 @@ export default function PrivacyPage() {
         {/* 第三者提供 */}
         <Card>
           <CardHeader>
-            <CardTitle>🔒 第三者提供について</CardTitle>
+            <CardTitle>第三者提供について</CardTitle>
           </CardHeader>
           <CardContent>
             <p>
@@ -182,7 +175,7 @@ export default function PrivacyPage() {
         {/* セキュリティ */}
         <Card>
           <CardHeader>
-            <CardTitle>🔐 セキュリティ</CardTitle>
+            <CardTitle>セキュリティ</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <ul className="space-y-2 ml-4 list-disc">
@@ -191,11 +184,11 @@ export default function PrivacyPage() {
               </li>
               <li>
                 <strong>データベース：</strong>
-                Neon PostgreSQLで安全に保存されます。パスワードやメールアドレスなど機密情報は暗号化されます。
+                Supabase PostgreSQLで安全に保存されます。診断入力データなど機密情報は暗号化されます。
               </li>
               <li>
                 <strong>アクセス制御：</strong>
-                ログインユーザーは自分の診断データのみアクセス可能です。
+                ユーザーは自分の診断データのみアクセス可能です。
               </li>
             </ul>
           </CardContent>
@@ -204,7 +197,7 @@ export default function PrivacyPage() {
         {/* お問い合わせ */}
         <Card>
           <CardHeader>
-            <CardTitle>📧 お問い合わせ</CardTitle>
+            <CardTitle>お問い合わせ</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p>

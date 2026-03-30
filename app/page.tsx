@@ -10,7 +10,7 @@ export default function Home() {
         <div className="flex items-center justify-center gap-2 p-3 rounded-lg bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800">
           <Shield className="w-4 h-4 text-green-600 dark:text-green-400" />
           <p className="text-xs sm:text-sm font-medium text-green-700 dark:text-green-300">
-            ✓ ログイン不要 | データ保存なし（匿名で診断できます）
+            ログイン不要 | 匿名で診断できます
           </p>
         </div>
 

@@ -11,9 +11,8 @@ export async function saveDiagnosis(params: {
   answers?: Record<string, unknown>;
 }) {
   const session = await auth();
-  if (!session?.user?.id) {
-    return { error: "Not authenticated" };
-  }
+  // ユーザーIDは optional（匿名でも保存可能）
+  const userId = session?.user?.id || null;
 
   const encryptionKey = process.env.ENCRYPTION_KEY;
   if (!encryptionKey) {
@@ -35,10 +34,9 @@ export async function saveDiagnosis(params: {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${session.user.id}`, // User ID をトークンとして送信
         },
         body: JSON.stringify({
-          userId: session.user.id,
+          userId: userId,
           type: params.type,
           input: encryptedInput,
           result: params.result,

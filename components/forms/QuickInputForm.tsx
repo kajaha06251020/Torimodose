@@ -8,11 +8,13 @@ import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { OCCUPATIONS, REGIONS, OCCUPATION_LABELS, REGION_LABELS } from "@/lib/constants";
+import { OCCUPATIONS, REGION_GROUPS, OCCUPATION_LABELS, REGION_LABELS } from "@/lib/constants";
 
 export function QuickInputForm() {
   const router = useRouter();
@@ -79,15 +81,20 @@ export function QuickInputForm() {
         <Label htmlFor="region">勤務地</Label>
         <Select value={region} onValueChange={(v) => setRegion(v ?? "")}>
           <SelectTrigger id="region">
-            <SelectValue placeholder="勤務地を選択">
+            <SelectValue placeholder="都道府県を選択">
               {region ? REGION_LABELS[region] : null}
             </SelectValue>
           </SelectTrigger>
           <SelectContent>
-            {REGIONS.map((r) => (
-              <SelectItem key={r.value} value={r.value}>
-                {r.label}
-              </SelectItem>
+            {REGION_GROUPS.map((group) => (
+              <SelectGroup key={group.label}>
+                <SelectLabel>{group.label}</SelectLabel>
+                {group.prefectures.map((p) => (
+                  <SelectItem key={p.value} value={p.value}>
+                    {p.label}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
             ))}
           </SelectContent>
         </Select>

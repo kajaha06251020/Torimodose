@@ -46,14 +46,33 @@ export function compareSalary(params: {
   age: number;
   stats: SalaryStatRow[];
 }): ComparisonResult | null {
+  // 都道府県 → 代表地域のフォールバックマップ（動的importを避けるためインライン定義）
+  const FALLBACK: Record<string, string> = {
+    hokkaido: "hokkaido", aomori: "hokkaido", iwate: "hokkaido",
+    miyagi: "hokkaido", akita: "hokkaido", yamagata: "hokkaido", fukushima: "hokkaido",
+    ibaraki: "saitama", tochigi: "saitama", gunma: "saitama",
+    saitama: "saitama", chiba: "chiba", tokyo: "tokyo", kanagawa: "kanagawa",
+    niigata: "saitama", toyama: "aichi", ishikawa: "aichi", fukui: "aichi",
+    yamanashi: "saitama", nagano: "saitama", gifu: "aichi", shizuoka: "aichi", aichi: "aichi",
+    mie: "aichi", shiga: "osaka", kyoto: "kyoto", osaka: "osaka",
+    hyogo: "hyogo", nara: "osaka", wakayama: "osaka",
+    tottori: "osaka", shimane: "osaka", okayama: "osaka", hiroshima: "osaka", yamaguchi: "osaka",
+    tokushima: "osaka", kagawa: "osaka", ehime: "osaka", kochi: "osaka",
+    fukuoka: "fukuoka", saga: "fukuoka", nagasaki: "fukuoka", kumamoto: "fukuoka",
+    oita: "fukuoka", miyazaki: "fukuoka", kagoshima: "fukuoka", okinawa: "fukuoka",
+  };
+
   const ageGroup = ageToGroup(params.age);
 
-  const stat = params.stats.find(
-    (s) =>
-      s.occupation === params.occupation &&
-      s.region === params.region &&
-      s.ageGroup === ageGroup
-  );
+  const findStat = (region: string) =>
+    params.stats.find(
+      (s) =>
+        s.occupation === params.occupation &&
+        s.region === region &&
+        s.ageGroup === ageGroup
+    );
+
+  const stat = findStat(params.region) ?? findStat(FALLBACK[params.region] ?? "");
 
   if (!stat) return null;
 

@@ -17,6 +17,7 @@ type Question = {
 type Category = {
   id: string
   label: string
+  emoji: string
   description: string
   questionCount: number
 }
@@ -269,29 +270,37 @@ const QUESTIONS: Question[] = [
 ]
 
 const CATEGORIES: Category[] = [
-  { id: "tax", label: "節税・控除", description: "所得控除・税額控除で税金を取り戻す", questionCount: 0 },
-  { id: "medical", label: "医療・健康", description: "高額医療費・傷病手当金など", questionCount: 0 },
-  { id: "employment", label: "雇用・就職", description: "失業給付・再就職手当・職業訓練など", questionCount: 0 },
-  { id: "childcare", label: "子育て・教育", description: "児童手当・出産一時金・学費支援など", questionCount: 0 },
-  { id: "disability", label: "障害・介護", description: "障害年金・介護休業給付・福祉用具など", questionCount: 0 },
-  { id: "living", label: "住宅・生活・年金", description: "住居支援・遺族年金・災害支援・物価高対策など", questionCount: 0 },
-  { id: "insurance", label: "社会保険料の減免", description: "国保軽減・年金免除・130万円の壁など", questionCount: 0 },
-  { id: "freelance", label: "フリーランス・事業者", description: "経営セーフティ共済・インボイス・補助金など", questionCount: 0 },
-  { id: "reform", label: "2025-2026 税制改正", description: "基礎控除引き上げ・年収の壁178万円・暗号資産など", questionCount: 0 },
-  { id: "inheritance", label: "相続・贈与", description: "暦年贈与・住宅資金贈与・教育資金贈与・相続時精算課税など", questionCount: 0 },
-  { id: "senior", label: "シニア向け", description: "在職老齢年金・高年齢雇用継続給付・加給年金・繰下げ受給など", questionCount: 0 },
-  { id: "foreigner", label: "外国人居住者向け", description: "租税条約による税金軽減・厚生年金の脱退一時金など", questionCount: 0 },
-  { id: "prevention", label: "予防・健康増進", description: "健康診断・予防接種・メタボ健診・歯科健診など", questionCount: 0 },
-  { id: "housing", label: "住宅・リフォーム", description: "省エネ住宅補助・窓リノベ・給湯器・太陽光・EV補助金など", questionCount: 0 },
-  { id: "agriculture", label: "農業・就農", description: "就農準備資金・経営開始資金・農業融資など", questionCount: 0 },
-  { id: "student", label: "学生向け", description: "給付型奨学金・授業料減免・教育訓練給付金など", questionCount: 0 },
-  { id: "energy", label: "省エネ・環境", description: "太陽光発電税制・蓄電池補助・断熱リフォームなど", questionCount: 0 },
+  { id: "tax",         emoji: "💰", label: "節税・控除",          description: "所得控除・税額控除で税金を取り戻す", questionCount: 0 },
+  { id: "medical",     emoji: "🏥", label: "医療・健康",          description: "高額医療費・傷病手当金など", questionCount: 0 },
+  { id: "employment",  emoji: "💼", label: "雇用・就職",          description: "失業給付・再就職手当・職業訓練など", questionCount: 0 },
+  { id: "childcare",   emoji: "👶", label: "子育て・教育",        description: "児童手当・出産一時金・学費支援など", questionCount: 0 },
+  { id: "disability",  emoji: "♿", label: "障害・介護",          description: "障害年金・介護休業給付・福祉用具など", questionCount: 0 },
+  { id: "living",      emoji: "🏠", label: "住宅・生活・年金",    description: "住居支援・遺族年金・災害支援など", questionCount: 0 },
+  { id: "insurance",   emoji: "🛡️", label: "社会保険料の減免",    description: "国保軽減・年金免除・130万円の壁など", questionCount: 0 },
+  { id: "freelance",   emoji: "💻", label: "フリーランス・事業者", description: "経営セーフティ共済・インボイス・補助金など", questionCount: 0 },
+  { id: "reform",      emoji: "📋", label: "2025-2026 税制改正",  description: "基礎控除引き上げ・年収の壁178万円・暗号資産など", questionCount: 0 },
+  { id: "inheritance", emoji: "📜", label: "相続・贈与",          description: "暦年贈与・住宅資金贈与・相続時精算課税など", questionCount: 0 },
+  { id: "senior",      emoji: "👴", label: "シニア向け",          description: "在職老齢年金・高年齢雇用継続・加給年金など", questionCount: 0 },
+  { id: "foreigner",   emoji: "🌏", label: "外国人居住者向け",    description: "租税条約・厚生年金の脱退一時金など", questionCount: 0 },
+  { id: "prevention",  emoji: "🩺", label: "予防・健康増進",      description: "健康診断・予防接種・メタボ健診など", questionCount: 0 },
+  { id: "housing",     emoji: "🏗️", label: "住宅・リフォーム",   description: "省エネ住宅補助・窓リノベ・給湯器など", questionCount: 0 },
+  { id: "agriculture", emoji: "🌾", label: "農業・就農",          description: "就農準備資金・経営開始資金など", questionCount: 0 },
+  { id: "student",     emoji: "🎓", label: "学生向け",            description: "給付型奨学金・授業料減免・教育訓練給付金など", questionCount: 0 },
+  { id: "energy",      emoji: "☀️", label: "省エネ・環境",        description: "太陽光発電税制・蓄電池補助・断熱リフォームなど", questionCount: 0 },
 ]
 
 // Compute question counts
 CATEGORIES.forEach((cat) => {
   cat.questionCount = QUESTIONS.filter((q) => q.category === cat.id).length
 })
+
+const PRESETS: { label: string; emoji: string; ids: string[] }[] = [
+  { label: "会社員",          emoji: "👔", ids: ["tax", "medical", "employment", "childcare", "insurance", "reform", "living"] },
+  { label: "フリーランス",    emoji: "💻", ids: ["tax", "freelance", "insurance", "medical", "reform", "employment"] },
+  { label: "子育て中",        emoji: "👶", ids: ["childcare", "tax", "medical", "employment", "living"] },
+  { label: "シニア",          emoji: "👴", ids: ["senior", "tax", "medical", "insurance", "living", "inheritance"] },
+  { label: "住宅購入・改修",  emoji: "🏠", ids: ["housing", "tax", "energy", "living"] },
+]
 
 type AnswerEntry = { using: boolean; amount?: number }
 
@@ -302,14 +311,14 @@ type Props = {
 
 export function DiagnosisWizard({ annualIncome, age }: Props) {
   const router = useRouter()
-  const [selectedCategories, setSelectedCategories] = useState<Set<string> | null>(null)
+  const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set())
+  const [started, setStarted] = useState(false)
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Record<string, AnswerEntry>>({})
   const [followUpValue, setFollowUpValue] = useState("")
   const [pendingYes, setPendingYes] = useState(false)
 
   const filteredQuestions = useMemo(() => {
-    if (!selectedCategories) return []
     return QUESTIONS.filter((q) => selectedCategories.has(q.category))
   }, [selectedCategories])
 
@@ -320,12 +329,9 @@ export function DiagnosisWizard({ annualIncome, age }: Props) {
 
   function toggleCategory(id: string) {
     setSelectedCategories((prev) => {
-      const next = new Set(prev ?? [])
-      if (next.has(id)) {
-        next.delete(id)
-      } else {
-        next.add(id)
-      }
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
       return next
     })
   }
@@ -334,9 +340,18 @@ export function DiagnosisWizard({ annualIncome, age }: Props) {
     setSelectedCategories(new Set(CATEGORIES.map((c) => c.id)))
   }
 
+  function clearAll() {
+    setSelectedCategories(new Set())
+  }
+
+  function applyPreset(ids: string[]) {
+    setSelectedCategories(new Set(ids))
+  }
+
   function startDiagnosis() {
-    if (!selectedCategories || selectedCategories.size === 0) return
+    if (selectedCategories.size === 0) return
     setStep(0)
+    setStarted(true)
   }
 
   function recordAndAdvance(entry: AnswerEntry) {
@@ -373,63 +388,112 @@ export function DiagnosisWizard({ annualIncome, age }: Props) {
   }
 
   // Category selection screen
-  if (selectedCategories === null || (selectedCategories.size > 0 && step === 0 && Object.keys(answers).length === 0 && !currentQuestion)) {
+  if (!started) {
+    const totalSelected = filteredQuestions.length
     return (
-      <Card className="w-full max-w-xl mx-auto">
-        <CardHeader>
-          <CardTitle className="text-lg">あなたに関係するカテゴリを選んでください</CardTitle>
-          <CardDescription>
-            選んだカテゴリの質問だけ表示します。関係ないカテゴリはスキップできます。
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-2">
-          {CATEGORIES.map((cat) => {
-            const isSelected = selectedCategories?.has(cat.id) ?? false
-            return (
-              <button
-                key={cat.id}
-                onClick={() => toggleCategory(cat.id)}
-                className={`flex items-start gap-3 rounded-lg border p-3 text-left transition-colors ${
-                  isSelected
-                    ? "border-primary bg-primary/5"
-                    : "border-border hover:border-primary/50"
-                }`}
+      <div className="w-full max-w-2xl mx-auto flex flex-col gap-4">
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-lg">あなたに関係するカテゴリを選んでください</CardTitle>
+            <CardDescription>
+              選んだカテゴリの質問だけ表示します。複数選択できます。
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-4">
+
+            {/* プリセット */}
+            <div>
+              <p className="mb-2 text-xs font-medium text-muted-foreground">よく使われる組み合わせ</p>
+              <div className="flex flex-wrap gap-2">
+                {PRESETS.map((preset) => (
+                  <button
+                    key={preset.label}
+                    onClick={() => applyPreset(preset.ids)}
+                    className="flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                  >
+                    <span>{preset.emoji}</span>
+                    {preset.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="h-px bg-border" />
+
+            {/* カテゴリグリッド */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {CATEGORIES.map((cat) => {
+                const isSelected = selectedCategories.has(cat.id)
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => toggleCategory(cat.id)}
+                    className={`flex items-start gap-3 rounded-lg border p-3 text-left transition-all ${
+                      isSelected
+                        ? "border-primary bg-primary/5 shadow-sm"
+                        : "border-border hover:border-primary/40 hover:bg-muted/30"
+                    }`}
+                  >
+                    <span className="text-xl leading-none mt-0.5 shrink-0">{cat.emoji}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-1">
+                        <span className="font-medium text-sm leading-snug">{cat.label}</span>
+                        <span className={`shrink-0 rounded-full px-1.5 py-0.5 text-xs tabular-nums ${
+                          isSelected ? "bg-primary/10 text-primary font-semibold" : "text-muted-foreground"
+                        }`}>
+                          {cat.questionCount}問
+                        </span>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed line-clamp-2">
+                        {cat.description}
+                      </p>
+                    </div>
+                    <div className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border transition-colors ${
+                      isSelected
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-muted-foreground/40"
+                    }`}>
+                      {isSelected && (
+                        <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </div>
+                  </button>
+                )
+              })}
+            </div>
+
+            {/* アクションボタン */}
+            <div className="flex items-center gap-2 pt-1">
+              <Button
+                variant="outline"
+                size="sm"
+                className="shrink-0"
+                onClick={selectedCategories.size === CATEGORIES.length ? clearAll : selectAll}
               >
-                <div className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border text-xs font-bold ${
-                  isSelected ? "border-primary bg-primary text-primary-foreground" : "border-muted-foreground"
-                }`}>
-                  {isSelected ? "v" : ""}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium text-sm">{cat.label}</span>
-                    <span className="text-xs text-muted-foreground">{cat.questionCount}問</span>
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-0.5">{cat.description}</p>
-                </div>
-              </button>
-            )
-          })}
-          <div className="flex gap-2 mt-4">
-            <Button
-              variant="outline"
-              size="sm"
-              className="flex-1"
-              onClick={selectAll}
-            >
-              すべて選択
-            </Button>
-            <Button
-              size="lg"
-              className="flex-1"
-              onClick={startDiagnosis}
-              disabled={!selectedCategories || selectedCategories.size === 0}
-            >
-              診断開始（{selectedCategories?.size ? filteredQuestions.length : 0}問）
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+                {selectedCategories.size === CATEGORIES.length ? "全て解除" : "全て選択"}
+              </Button>
+              <Button
+                size="lg"
+                className="flex-1"
+                onClick={startDiagnosis}
+                disabled={selectedCategories.size === 0}
+              >
+                {selectedCategories.size > 0
+                  ? `診断開始（${totalSelected}問）`
+                  : "カテゴリを選んでください"}
+              </Button>
+            </div>
+
+            {selectedCategories.size > 0 && (
+              <p className="text-center text-xs text-muted-foreground -mt-2">
+                {selectedCategories.size}カテゴリ選択中 · 約{totalSelected}問
+              </p>
+            )}
+          </CardContent>
+        </Card>
+      </div>
     )
   }
 

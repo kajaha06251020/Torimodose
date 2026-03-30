@@ -31,7 +31,7 @@ export function QuickInputForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4">
         <div className="space-y-2">
           <Label htmlFor="income">年収（万円）</Label>
           <Input

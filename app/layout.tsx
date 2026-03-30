@@ -19,6 +19,11 @@ export const metadata: Metadata = {
   description: "給与相場との比較と未申請の控除・給付金を診断。若者のための経済的武装ツール。",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{

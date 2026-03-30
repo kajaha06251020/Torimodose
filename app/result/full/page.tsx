@@ -46,7 +46,7 @@ export default async function FullResultPage({ searchParams }: Props) {
     <main className="mx-auto max-w-2xl px-4 py-10">
       <div className="mb-8 text-center">
         <p className="text-sm text-muted-foreground">取り戻せるお金の総額</p>
-        <p className="text-5xl font-extrabold text-red-600">
+        <p className="text-4xl sm:text-5xl font-extrabold text-red-600 break-all">
           ¥{totalPotentialSaving.toLocaleString()}/年
         </p>
         {taxDeductions.length > 0 && benefits.length > 0 && (

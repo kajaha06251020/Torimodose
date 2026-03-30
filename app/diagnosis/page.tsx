@@ -20,7 +20,7 @@ export default async function DiagnosisPage({ searchParams }: Props) {
   }
 
   return (
-    <div className="flex flex-col items-center py-16 px-4 min-h-screen bg-zinc-50 dark:bg-black">
+    <div className="flex flex-col items-center py-8 sm:py-16 px-4 min-h-screen bg-zinc-50 dark:bg-black">
       <h1 className="text-2xl font-semibold tracking-tight text-foreground mb-8">
         控除・給付金の診断
       </h1>

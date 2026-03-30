@@ -18,9 +18,9 @@ export function DeductionCard({
   return (
     <Card>
       <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
+        <div className="flex items-start justify-between gap-2">
           <CardTitle className="text-base">{name}</CardTitle>
-          <span className="text-lg font-bold text-red-600">
+          <span className="shrink-0 text-lg font-bold text-red-600">
             ¥{potentialSaving.toLocaleString()}
           </span>
         </div>

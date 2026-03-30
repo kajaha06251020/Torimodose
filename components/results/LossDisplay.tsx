@@ -17,7 +17,7 @@ export function LossDisplay({ annualLoss, median, percentile }: LossDisplayProps
   return (
     <div className="text-center">
       <p className="text-sm text-muted-foreground">あなたの推定損失額</p>
-      <p className={`mt-2 text-5xl font-black ${hasLoss ? "text-red-600" : "text-green-600"}`}>
+      <p className={`mt-2 text-4xl sm:text-5xl font-black ${hasLoss ? "text-red-600" : "text-green-600"}`}>
         {hasLoss ? "-" : "+"}¥{annualLoss.toLocaleString()}
         <span className="text-base font-normal text-muted-foreground">/年</span>
       </p>

@@ -4,7 +4,6 @@ import { auth } from "@/lib/auth";
 import { encrypt } from "@/lib/crypto";
 import { db } from "@/lib/db";
 import { diagnoses, diagnosisInputs } from "@/lib/db/schema";
-import { sql } from "drizzle-orm";
 
 export async function saveDiagnosis(params: {
   type: "quick" | "full";
@@ -31,25 +30,38 @@ export async function saveDiagnosis(params: {
   }
 
   try {
-    // まず最小限の raw SQL で INSERT テスト
-    const resultRows = await db.execute(
-      sql`INSERT INTO diagnoses (type, input, result, total_potential_saving, answers)
-          VALUES (${params.type}, ${inputData}, ${JSON.stringify(params.result)}::jsonb, ${params.totalPotentialSaving || 0}, ${JSON.stringify(params.answers || null)}::jsonb)
-          RETURNING id`
-    );
+    const [inserted] = await db
+      .insert(diagnoses)
+      .values({
+        userId,
+        type: params.type,
+        input: inputData,
+        result: params.result,
+        totalPotentialSaving: params.totalPotentialSaving || 0,
+        answers: params.answers || null,
+      })
+      .returning({ id: diagnoses.id });
 
-    const diagnosisId = (resultRows as unknown as Array<{ id: string }>)[0]?.id;
-
-    if (diagnosisId && params.diagnosisInputData) {
-      await db.execute(
-        sql`INSERT INTO diagnosis_inputs (diagnosis_id, income, age, occupation, region)
-            VALUES (${diagnosisId}, ${params.diagnosisInputData.income}, ${params.diagnosisInputData.age}, ${params.diagnosisInputData.occupation}, ${params.diagnosisInputData.region})`
-      );
+    if (inserted.id && params.diagnosisInputData) {
+      await db.insert(diagnosisInputs).values({
+        diagnosisId: inserted.id,
+        income: params.diagnosisInputData.income,
+        age: params.diagnosisInputData.age,
+        occupation: params.diagnosisInputData.occupation,
+        region: params.diagnosisInputData.region,
+      });
     }
 
-    return { success: true, diagnosisId };
-  } catch (error) {
-    const msg = error instanceof Error ? error.message : String(error);
-    return { error: msg };
+    return { success: true, diagnosisId: inserted.id };
+  } catch (error: unknown) {
+    // postgres.js のエラーは code, detail, hint 等のプロパティを持つ
+    const e = error as Record<string, unknown>;
+    const info = [
+      `msg:${e.message || "?"}`.slice(0, 60),
+      `code:${e.code || "?"}`,
+      `detail:${e.detail || "?"}`.slice(0, 60),
+      `severity:${e.severity || "?"}`,
+    ].join(" | ");
+    return { error: info };
   }
 }

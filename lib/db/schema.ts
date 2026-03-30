@@ -37,6 +37,18 @@ export const salaryStatistics = pgTable("salary_statistics", {
   source: text("source").notNull(),
 });
 
+export const diagnosisInputs = pgTable("diagnosis_inputs", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  diagnosisId: uuid("diagnosis_id")
+    .references(() => diagnoses.id)
+    .notNull(),
+  income: integer("income").notNull(),
+  age: integer("age").notNull(),
+  occupation: text("occupation").notNull(),
+  region: text("region").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 export const deductionRules = pgTable("deduction_rules", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),

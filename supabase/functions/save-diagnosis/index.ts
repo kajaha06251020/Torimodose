@@ -36,8 +36,8 @@ Deno.serve(async (req) => {
     }
 
     // Supabaseクライアント初期化（SERVICE_ROLE_KEYを使用）
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")
-    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")
+    const supabaseUrl = Deno.env.get("DB_URL")
+    const supabaseKey = Deno.env.get("DB_SERVICE_KEY")
 
     if (!supabaseUrl || !supabaseKey) {
       return new Response(

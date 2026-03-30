@@ -58,7 +58,9 @@ export async function saveDiagnosis(params: {
     }
 
     const data = await response.json();
-    return { success: true, data };
+    // Extract diagnosis ID from the saved data
+    const diagnosisId = data.data?.[0]?.id;
+    return { success: true, data, diagnosisId };
   } catch (error) {
     console.error("Error calling save-diagnosis function:", error);
     return { error: "Failed to save diagnosis" };

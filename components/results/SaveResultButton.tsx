@@ -9,16 +9,31 @@ type Props = {
   input: Record<string, unknown>;
   result: Record<string, unknown>;
   isLoggedIn: boolean;
+  totalPotentialSaving?: number;
+  answers?: Record<string, unknown>;
 };
 
-export function SaveResultButton({ type, input, result, isLoggedIn }: Props) {
+export function SaveResultButton({
+  type,
+  input,
+  result,
+  isLoggedIn,
+  totalPotentialSaving,
+  answers,
+}: Props) {
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
 
   function handleSave() {
     startTransition(async () => {
-      const res = await saveDiagnosis({ type, input, result });
+      const res = await saveDiagnosis({
+        type,
+        input,
+        result,
+        totalPotentialSaving,
+        answers,
+      });
       if (res.error) {
         setError(res.error);
       } else {

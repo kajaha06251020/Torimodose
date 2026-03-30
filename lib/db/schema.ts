@@ -20,6 +20,8 @@ export const diagnoses = pgTable("diagnoses", {
   type: text("type", { enum: ["quick", "full"] }).notNull(),
   input: text("input").notNull(),
   result: jsonb("result").notNull(),
+  totalPotentialSaving: integer("total_potential_saving").default(0),
+  answers: jsonb("answers"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

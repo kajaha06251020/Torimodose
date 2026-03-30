@@ -34,7 +34,9 @@ export default function Home() {
         </Card>
 
         <p className="text-center text-xs text-muted-foreground">
-          詳しい内容は<a href="/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">プライバシーポリシー</a>をご覧ください。
+          <a href="/privacy" className="text-blue-600 dark:text-blue-400 hover:underline font-semibold">
+            プライバシーポリシーを確認する →
+          </a>
         </p>
       </div>
     </div>

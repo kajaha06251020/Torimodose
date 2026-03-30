@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { DeductionCard } from "@/components/results/DeductionCard";
+import { SaveResultButton } from "@/components/results/SaveResultButton";
 import { runFullDiagnosis } from "@/lib/actions/full-diagnosis";
+import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { deductionRules } from "@/lib/db/schema";
 import type { DeductionRule } from "@/lib/engine/deduction-engine";
@@ -13,6 +14,7 @@ type Props = {
 
 export default async function FullResultPage({ searchParams }: Props) {
   const params = await searchParams;
+  const session = await auth();
 
   if (!params.data) {
     redirect("/");
@@ -98,11 +100,24 @@ export default async function FullResultPage({ searchParams }: Props) {
         </div>
       )}
 
-      <div className="mt-10 flex flex-col items-center gap-4">
-        <Button render={<Link href="/auth/signup" />} size="lg">結果を保存する（無料アカウント作成）</Button>
-        <Link href="/" className="text-sm text-muted-foreground underline">
-          もう一度診断する
-        </Link>
+      <div className="mt-10 space-y-4">
+        <SaveResultButton
+          type="full"
+          input={parsedData}
+          result={{
+            deductions,
+            totalPotentialSaving,
+            answers: parsedData.answers,
+          }}
+          isLoggedIn={!!session?.user?.id}
+          totalPotentialSaving={totalPotentialSaving}
+          answers={parsedData.answers}
+        />
+        <div className="text-center">
+          <Link href="/" className="text-sm text-muted-foreground underline hover:no-underline">
+            もう一度診断する
+          </Link>
+        </div>
       </div>
     </main>
   );

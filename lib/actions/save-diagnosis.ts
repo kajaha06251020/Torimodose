@@ -9,6 +9,8 @@ export async function saveDiagnosis(params: {
   type: "quick" | "full";
   input: Record<string, unknown>;
   result: Record<string, unknown>;
+  totalPotentialSaving?: number;
+  answers?: Record<string, unknown>;
 }) {
   const session = await auth();
   if (!session?.user?.id) {
@@ -27,6 +29,8 @@ export async function saveDiagnosis(params: {
     type: params.type,
     input: encryptedInput,
     result: params.result,
+    totalPotentialSaving: params.totalPotentialSaving || 0,
+    answers: params.answers,
   });
 
   return { success: true };

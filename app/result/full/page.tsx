@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { DeductionCard } from "@/components/results/DeductionCard";
-import { SaveResultButton } from "@/components/results/SaveResultButton";
 import { runFullDiagnosis } from "@/lib/actions/full-diagnosis";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { deductionRules } from "@/lib/db/schema";
+import { saveDiagnosis } from "@/lib/actions/save-diagnosis";
 import type { DeductionRule } from "@/lib/engine/deduction-engine";
 
 type Props = {
@@ -39,6 +39,21 @@ export default async function FullResultPage({ searchParams }: Props) {
 
   const result = runFullDiagnosis(parsedData, rules);
   const { deductions, totalPotentialSaving } = result;
+
+  // ログイン中なら自動保存
+  if (session?.user?.id) {
+    await saveDiagnosis({
+      type: "full",
+      input: parsedData,
+      result: {
+        deductions,
+        totalPotentialSaving,
+        answers: parsedData.answers,
+      },
+      totalPotentialSaving,
+      answers: parsedData.answers,
+    });
+  }
 
   const taxDeductions = deductions.filter((d) => d.category !== "benefit");
   const benefits = deductions.filter((d) => d.category === "benefit");
@@ -101,18 +116,29 @@ export default async function FullResultPage({ searchParams }: Props) {
       )}
 
       <div className="mt-10 space-y-4">
-        <SaveResultButton
-          type="full"
-          input={parsedData}
-          result={{
-            deductions,
-            totalPotentialSaving,
-            answers: parsedData.answers,
-          }}
-          isLoggedIn={!!session?.user?.id}
-          totalPotentialSaving={totalPotentialSaving}
-          answers={parsedData.answers}
-        />
+        {session?.user?.id ? (
+          <>
+            <div className="rounded-lg bg-green-50 p-4 text-center text-green-800">
+              ✓ 診断結果を保存しました
+            </div>
+            <p className="text-center text-sm text-muted-foreground">
+              マイページからいつでも過去の診断を確認できます
+            </p>
+          </>
+        ) : (
+          <>
+            <div className="space-y-3">
+              <p className="text-center text-sm text-muted-foreground">
+                ℹ️ この診断結果はブラウザに保存されていません。（匿名利用中）
+              </p>
+              <a href="/auth/signup">
+                <button className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 px-4 py-2 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800">
+                  結果を保存する（アカウント作成）
+                </button>
+              </a>
+            </div>
+          </>
+        )}
         <div className="text-center">
           <Link href="/" className="text-sm text-muted-foreground underline hover:no-underline">
             もう一度診断する
